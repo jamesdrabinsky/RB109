@@ -38,12 +38,19 @@ A:
 
 =end
 
-def is_valid_walk?(directions)
-  letter_count = directions.each_with_object(Hash.new(0)) do |letter, hash|
-    hash[letter] += 1
+def return_to_start?(directions)
+  start = 0
+  
+  directions.each do |elem|
+    start += 1 if ['n', 'e'].include?(elem)
+    start -= 1 if ['w', 's'].include?(elem)
   end
+  
+  start == 0
+end
 
-  letter_count.values.uniq.size == 1 && directions.size == 10
+def is_valid_walk?(directions)
+  return_to_start?(directions) && directions.size == 10
 end
 
 p is_valid_walk?(['n','s','n','s','n','s','n','s','n','s']) == true

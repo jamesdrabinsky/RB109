@@ -40,20 +40,21 @@ def substring?(str_1, str_2)
 end
 
 def in_array(array1, array2)
-  array1.select { |word1| array2.any? { |word2| substring?(word1, word2) } }.sort
+  # array1.select { |word1| array2.any? { |word2| substring?(word1, word2) } }.sort
+  array1.select { |word1| array2.any? { |word2| word2.include?(word1) } }.sort
   # word2.include?(word1)
 end
 
-def in_array(array1, array2)
-  substrings = []
+# def in_array(array1, array2)
+#   substrings = []
 
-  array1.each do |word1|
-    array2.each do |word2|
-      substrings << word1 if substring?(word1, word2)
-    end
-  end
-  substrings.uniq.sort
-end
+#   array1.each do |word1|
+#     array2.each do |word2|
+#       substrings << word1 if substring?(word1, word2)
+#     end
+#   end
+#   substrings.uniq.sort
+# end
 
 
 a1 = ["arp", "live", "strong"]
@@ -62,4 +63,8 @@ p in_array(a1, a2) == ["arp", "live", "strong"]
 
 a1 = ["tarp", "mice", "bull"]
 a2 - []
+p in_array(a1, a2) == []
+
+a1 = ["tarp", "mice", "bull"]
+a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
 p in_array(a1, a2) == []
